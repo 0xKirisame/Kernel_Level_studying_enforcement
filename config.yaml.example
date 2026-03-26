@@ -1,0 +1,29 @@
+version: 1
+allowed_domains:
+  - domain: qiyas.sa           # Official Qiyas/GAT publisher
+    include_subdomains: true
+  - domain: nabeedu.com
+    include_subdomains: true
+  - domain: anaostori.com
+    include_subdomains: true
+  - domain: notebooklm.google.com
+    include_subdomains: false
+  - domain: gemini.google.com
+    include_subdomains: false
+  # Google auth + assets required for Google services to function
+  - domain: accounts.google.com
+    include_subdomains: false
+  - domain: apis.google.com
+    include_subdomains: false
+  - domain: generativelanguage.googleapis.com   # Gemini CLI API endpoint
+    include_subdomains: false
+  - domain: gstatic.com
+    include_subdomains: true
+
+firewall:
+  allow_ports: [80, 443]
+  refresh_interval_minutes: 30
+
+execution:
+  # Extra binaries to allow beyond Firefox (e.g. system helpers Firefox needs)
+  extra_allowed: []

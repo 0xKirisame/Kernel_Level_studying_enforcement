@@ -1,0 +1,21 @@
+{
+  "policies": {
+    "DNSOverHTTPS": {
+      "Enabled": false,
+      "Locked": true
+    },
+    "DisablePrivateBrowsing": false,
+    "ExtensionSettings": {
+      "*": {
+        "blocked_install_message": "Study mode active. Extension installation is disabled.",
+        "installation_mode": "blocked"
+      }
+    },
+    "DisableDeveloperTools": false,
+    "NetworkPrediction": false,
+    "Proxy": {
+      "Mode": "none",
+      "Locked": true
+    }
+  }
+}

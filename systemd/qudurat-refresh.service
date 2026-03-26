@@ -1,0 +1,15 @@
+[Unit]
+Description=Refresh qudurat-jail IP whitelist
+After=qudurat-jail.service
+Requires=qudurat-jail.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/qudurat-jail/src
+Environment=PYTHONPATH=/opt/qudurat-jail/src
+EnvironmentFile=/etc/qudurat-jail/secret
+ExecStart=/usr/bin/python3 /opt/qudurat-jail/src/apply_rules.py --refresh-ips-only
+User=root
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=qudurat-refresh

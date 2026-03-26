@@ -1,0 +1,13 @@
+[Unit]
+Description=Refresh qudurat-jail IP whitelist (CDN rotation)
+Requires=qudurat-jail.service
+
+[Timer]
+# Run every 30 minutes while the jail is active
+OnUnitActiveSec=30min
+# Also fire shortly after the jail starts (give DNS a moment to settle)
+OnActiveSec=2min
+Unit=qudurat-refresh.service
+
+[Install]
+WantedBy=qudurat-jail.service

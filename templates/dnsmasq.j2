@@ -1,0 +1,18 @@
+{# dnsmasq.j2 — Jinja2 template for qudurat-jail dnsmasq config.
+   Variables:
+     allowed_domains : list[dict]   — each has 'domain' and 'include_subdomains'
+     upstream_dns    : str          — upstream resolver (default: 8.8.8.8)
+#}
+# qudurat-jail dnsmasq config — auto-generated, do not edit manually
+
+# Ignore any upstreams NetworkManager injected
+no-resolv
+
+# Default: no upstream server → SERVFAIL for non-whitelisted domains
+server=
+
+{% for entry in allowed_domains %}
+# {{ entry.domain }}{% if entry.include_subdomains %} (+ subdomains){% endif %}
+
+server=/{{ entry.domain }}/{{ upstream_dns }}
+{% endfor %}

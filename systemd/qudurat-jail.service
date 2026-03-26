@@ -1,0 +1,29 @@
+[Unit]
+Description=Qudurat Study Jail
+Documentation=https://github.com/your-repo/qudurat_kernel_jail
+After=NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/bin/python3 /opt/qudurat-jail/src/apply_rules.py
+ExecStop=/usr/bin/python3 /opt/qudurat-jail/src/stop_rules.py
+
+# Python needs to find the sibling modules (dns_manager, etc.)
+WorkingDirectory=/opt/qudurat-jail/src
+Environment=PYTHONPATH=/opt/qudurat-jail/src
+
+# Read QUDURAT_PASSWORD from this file (chmod 600, root-owned)
+EnvironmentFile=/etc/qudurat-jail/secret
+
+# Run as root (required for nft, apparmor_parser, NM config writes)
+User=root
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=qudurat-jail
+
+[Install]
+WantedBy=multi-user.target
